@@ -7,114 +7,143 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
+      title: 'العزلة الاجتماعية',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        primarySwatch: Colors.blue,
+        fontFamily: 'Tajawal',
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(fontSize: 18.0, height: 1.5),
+          bodyMedium: TextStyle(fontSize: 16.0, height: 1.4),
+          headlineSmall: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold, color: Colors.blueGrey),
+          titleLarge: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+        ),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      home: const SocialIsolationPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class SocialIsolationPage extends StatelessWidget {
+  const SocialIsolationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: const Text(
+          'العزلة الاجتماعية لدى الطالب الجامعي',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.blueGrey[700],
+        centerTitle: true,
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text('$_counter', style: Theme.of(context).textTheme.headlineMedium),
-          ],
+      body: Directionality(
+        textDirection: TextDirection.rtl,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildSection(
+                  context,
+                  'ما هي العزلة الاجتماعية؟',
+                  'هي حالة من الانفصال ونقص التواصل الهادف مع الآخرين. لا تتعلق العزلة الاجتماعية بعدد الأصدقاء لديك، بل تتعلق بالشعور بالوحدة والانفصال عن المحيط، وهي مشكلة شائعة بشكل خاص بين طلاب الجامعات الذين ينتقلون إلى بيئة جديدة.',
+                  'https://picsum.photos/seed/1/600/400',
+                ),
+                _buildSection(
+                  context,
+                  'أسباب العزلة لدى الطالب الجامعي',
+                  '1.  **الانتقال لبيئة جديدة:** البعد عن الأهل والأصدقاء القدامى.\n'
+                  '2.  **الضغط الدراسي:** الانشغال بالدراسة والواجبات قد يقلل من فرص التواصل.\n'
+                  '3.  **صعوبة تكوين صداقات:** الخجل أو القلق الاجتماعي قد يمنع الطالب من المبادرة.\n'
+                  '4.  **وسائل التواصل الاجتماعي:** قد تخلق شعوراً بالمقارنة والوحدة بدلاً من التواصل الحقيقي.\n'
+                  '5.  **مشاكل شخصية:** مثل المشاكل المادية أو العائلية التي تزيد من عزلة الطالب.',
+                  'https://picsum.photos/seed/2/600/400',
+                ),
+                _buildSection(
+                  context,
+                  'الآثار السلبية للعزلة الاجتماعية',
+                  'يمكن أن تؤثر العزلة سلبًا على الصحة النفسية والجسدية للطالب، مما يؤدي إلى:\n'
+                  '-   **زيادة القلق والاكتئاب:** الشعور بالوحدة المستمرة يفاقم من المشاعر السلبية.\n'
+                  '-   **تراجع الأداء الأكاديمي:** صعوبة التركيز وانخفاض الدافعية للدراسة.\n'
+                  '-   **ضعف جهاز المناعة:** أظهرت الدراسات أن العزلة يمكن أن تضعف قدرة الجسم على مقاومة الأمراض.\n'
+                  '-   **مشاكل في النوم:** الأرق أو النوم المفرط.',
+                  'https://picsum.photos/seed/3/600/400',
+                ),
+                _buildSection(
+                  context,
+                  'طرق التغلب على العزلة',
+                  '1.  **المشاركة في الأنشطة الطلابية:** انضم إلى الأندية والفرق التي تثير اهتمامك.\n'
+                  '2.  **التطوع:** وسيلة رائعة لمقابلة أشخاص جدد والشعور بالانتماء.\n'
+                  '3.  **المبادرة بالحديث:** ابدأ محادثات بسيطة مع زملائك في الفصل.\n'
+                  '4.  **استخدام التكنولوجيا بإيجابية:** استخدم التطبيقات للتواصل مع الأصدقاء والعائلة وتنظيم لقاءات.\n'
+                  '5.  **طلب المساعدة:** لا تتردد في التحدث إلى مرشد نفسي في الجامعة.',
+                  'https://picsum.photos/seed/4/600/400',
+                ),
+                 _buildSection(
+                  context,
+                  'نصائح لبناء علاقات اجتماعية صحية',
+                  '-   **كن على طبيعتك:** لا تحاول أن تكون شخصًا آخر لإثارة إعجاب الناس.\n'
+                  '-   **أظهر الاهتمام بالآخرين:** استمع جيدًا عندما يتحدثون واطرح أسئلة.\n'
+                  '-   **شارك اهتماماتك:** تحدث عن هواياتك وما تحب، فهذا يفتح أبوابًا للنقاش.\n'
+                  '-   **كن إيجابيًا ومنفتحًا:** الابتسامة والود يجذبان الناس إليك.\n'
+                  '-   **الصبر:** بناء الصداقات الحقيقية يستغرق وقتًا، فلا تستسلم.',
+                  'https://picsum.photos/seed/5/600/400',
+                ),
+              ],
+            ),
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  Widget _buildSection(BuildContext context, String title, String content, String imageUrl) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 24.0),
+      elevation: 4.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.network(
+            imageUrl,
+            height: 200,
+            width: double.infinity,
+            fit: BoxFit.cover,
+            loadingBuilder: (context, child, progress) {
+              return progress == null ? child : const Center(child: CircularProgressIndicator());
+            },
+            errorBuilder: (context, error, stackTrace) {
+              return const Icon(Icons.error, size: 50, color: Colors.red);
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                const SizedBox(height: 12.0),
+                Text(
+                  content,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                  textAlign: TextAlign.justify,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
